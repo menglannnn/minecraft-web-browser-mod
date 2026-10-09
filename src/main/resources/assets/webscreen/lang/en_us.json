@@ -1,0 +1,24 @@
+{
+  "block.webscreen.web_screen": "Web Screen",
+  "item.webscreen.web_screen": "Web Screen",
+  "block.webscreen.web_tab": "Web Tab",
+  "item.webscreen.web_tab": "Web Tab",
+  "itemGroup.webscreen": "Web Screen",
+  "webscreen.gui.title": "Web Screen - Enter a URL",
+  "webscreen.gui.hint": "e.g. https://www.example.com",
+  "webscreen.gui.play": "Play",
+  "webscreen.gui.stop": "Stop",
+  "webscreen.gui.tip": "LMB/RMB click the page, wheel scrolls. Hold Shift: LMB mines, RMB edits the URL",
+  "webscreen.gui.invalid": "That address is not allowed",
+  "webscreen.gui.typing": "Page typing mode",
+  "webscreen.gui.bilibili_login": "Bilibili login page",
+
+  "key.categories.webscreen": "Web Screen",
+  "key.webscreen.remote_control": "Page typing mode (Esc to exit)",
+
+  "gui.webscreen.remote.title": "Page typing mode",
+  "gui.webscreen.remote.hint": "Keys go to the page - aim with the mouse, click with LMB/RMB - Esc to exit",
+  "gui.webscreen.remote.no_target": "Crosshair is not on a screen - Esc to exit",
+
+  "webscreen.cookie.import": "Import local login"
+}

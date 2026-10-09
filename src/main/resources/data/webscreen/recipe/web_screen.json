@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "webscreen",
+  "pattern": [
+    "GGG",
+    "GDG",
+    "GGG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass_pane" },
+    "D": { "item": "minecraft:daylight_detector" }
+  },
+  "result": {
+    "id": "webscreen:web_screen",
+    "count": 1
+  }
+}

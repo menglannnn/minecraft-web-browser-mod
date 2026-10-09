@@ -1,0 +1,109 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+version = mod_version
+group = mod_group_id
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    // 指定 NeoForge 版本，会自动拉取 Minecraft 1.21.1 + 官方映射
+    version = project.neo_version
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+        }
+        data {
+            clientData()
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+    // MCEF（在 Minecraft 内嵌 Chromium 的库）的官方仓库
+    maven {
+        name = 'CinemaMod'
+        url = 'https://mcef-download.cinemamod.com/repositories/releases'
+    }
+}
+
+dependencies {
+    // 编译期需要 MCEF 的 API；运行期由玩家在 mods 文件夹里放 MCEF 本体提供
+    compileOnly "com.cinemamod:mcef-neoforge:${mcef_version}"
+    // 开发环境（runClient）需要在运行时类路径上也能找到 MCEF
+    runtimeOnly "com.cinemamod:mcef-neoforge:${mcef_version}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// ---------------------------------------------------------------------------
+// 规避 NeoForge / securejarhandler 的一个上游偶发崩溃：
+//
+//   java.nio.file.FileSystemNotFoundException
+//     at cpw.mods.niofs.union.UnionFileSystemProvider.getFileSystem(...)
+//     at net.neoforged.fml.earlydisplay.RenderElement.initializeTexture(...)
+//
+// 早期加载窗口的渲染线程去读自己模块里的类时，union 文件系统里查不到对应的 jar，
+// 于是整个游戏在 "Initializing game" 阶段直接崩掉。同一个工程、同样的参数，
+// 有时能起来有时崩——是竞态，不是配置问题。
+//
+// NeoForge 官方的规避办法是关掉早期加载窗口（net.neoforged.fml.loading.ImmediateWindowHandler
+// 会因此改用 DummyProvider，完全不碰 DisplayWindow）。但这个开关只从 run/config/fml.toml 读，
+// FMLConfig 没有系统属性/环境变量入口，所以这里在跑游戏之前把配置同步过去。
+//
+// 取值来自 gradle.properties 的 neoforge.earlyWindowControl。
+// ---------------------------------------------------------------------------
+def earlyWindowControl = (findProperty('neoforge.earlyWindowControl') ?: 'true').toString()
+
+tasks.register('syncFmlConfig') {
+    def toml = layout.projectDirectory.file('run/config/fml.toml').asFile
+    def wanted = "earlyWindowControl = ${earlyWindowControl}"
+    outputs.upToDateWhen { false }
+    doLast {
+        toml.parentFile.mkdirs()
+        def text = toml.exists() ? toml.text : ''
+        def existing = text =~ /(?m)^\s*earlyWindowControl\s*=.*$/
+        if (existing.find()) {
+            text = existing.replaceAll(wanted)
+        } else {
+            if (text && !text.endsWith('\n')) {
+                text += '\n'
+            }
+            text += wanted + '\n'
+        }
+        toml.text = text
+    }
+}
+
+tasks.matching { it.name == 'runClient' || it.name == 'runServer' || it.name == 'runData' }
+        .configureEach { dependsOn 'syncFmlConfig' }
+
+jar {
+    manifest {
+        attributes([
+            'Specification-Title'   : mod_id,
+            'Specification-Vendor'  : mod_authors,
+            'Specification-Version' : '1',
+            'Implementation-Title'  : project.name,
+            'Implementation-Version': archiveVersion,
+            'Implementation-Vendor' : mod_authors
+        ])
+    }
+}

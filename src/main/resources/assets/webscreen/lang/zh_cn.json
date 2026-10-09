@@ -1,0 +1,24 @@
+{
+  "block.webscreen.web_screen": "网页方块",
+  "item.webscreen.web_screen": "网页方块",
+  "block.webscreen.web_tab": "标签页方块",
+  "item.webscreen.web_tab": "标签页方块",
+  "itemGroup.webscreen": "网页方块",
+  "webscreen.gui.title": "网页方块 — 输入网址",
+  "webscreen.gui.hint": "例如 https://www.bilibili.com",
+  "webscreen.gui.play": "播放",
+  "webscreen.gui.stop": "停止",
+  "webscreen.gui.tip": "左键/右键直接点网页、滚轮滚动页面；按住 Shift 后：左键挖掉方块、右键改网址",
+  "webscreen.gui.invalid": "这个地址不被允许",
+  "webscreen.gui.typing": "网页输入模式",
+  "webscreen.gui.bilibili_login": "B 站登录页",
+
+  "key.categories.webscreen": "网页方块",
+  "key.webscreen.remote_control": "网页输入模式（Esc 退出）",
+
+  "gui.webscreen.remote.title": "网页输入模式",
+  "gui.webscreen.remote.hint": "键盘已转发给网页　·　移动鼠标瞄准，左右键点击　·　Esc 退出",
+  "gui.webscreen.remote.no_target": "准星没有对着屏幕　·　Esc 退出",
+
+  "webscreen.cookie.import": "导入本机登录"
+}

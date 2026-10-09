@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "webscreen:block/web_tab" },
+    "facing=east": { "model": "webscreen:block/web_tab", "y": 90 },
+    "facing=south": { "model": "webscreen:block/web_tab", "y": 180 },
+    "facing=west": { "model": "webscreen:block/web_tab", "y": 270 }
+  }
+}

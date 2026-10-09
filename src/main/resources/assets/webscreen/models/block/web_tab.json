@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "webscreen:block/web_screen_side",
+    "bezel": "webscreen:block/web_screen_bezel",
+    "side": "webscreen:block/web_screen_side"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 11.5],
+      "to": [16, 8, 15.5],
+      "faces": {
+        "north": { "uv": [0, 0, 16, 8], "texture": "#bezel" },
+        "east": { "uv": [0, 0, 4, 8], "texture": "#side" },
+        "south": { "uv": [0, 0, 16, 8], "texture": "#bezel" },
+        "west": { "uv": [0, 0, 4, 8], "texture": "#side" },
+        "up": { "uv": [0, 0, 16, 4], "texture": "#side" },
+        "down": { "uv": [0, 0, 16, 4], "texture": "#side" }
+      }
+    }
+  ]
+}

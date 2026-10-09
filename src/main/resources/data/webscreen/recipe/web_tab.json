@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "webscreen",
+  "pattern": [
+    "GGG",
+    "PSP"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass_pane" },
+    "P": { "item": "minecraft:paper" },
+    "S": { "item": "webscreen:web_screen" }
+  },
+  "result": {
+    "id": "webscreen:web_tab",
+    "count": 8
+  }
+}

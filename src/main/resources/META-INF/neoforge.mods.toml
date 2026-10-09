@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "https://example.com/webscreen/issues"
+
+[[mods]]
+modId = "webscreen"
+version = "1.0.0"
+displayName = "Web Screen"
+authors = "WebScreen"
+description = '''
+在 Minecraft 里放置"网页方块"：宽 1 格、高 2 格（1:2）。
+空手右键方块即可输入网址，网页（含视频）会直接在方块表面上播放。
+需要同时安装 MCEF（客户端）。
+'''
+logoFile = "icon.png"
+
+[[dependencies.webscreen]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.webscreen]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "BOTH"
+
+# 只在客户端需要 MCEF：服务端不需要装
+[[dependencies.webscreen]]
+modId = "mcef"
+type = "required"
+versionRange = "[2.1,)"
+ordering = "AFTER"
+side = "CLIENT"
